@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaUsers, FaExternalLinkAlt } from 'react-icons/fa';
 import './Events.css';
 
+
 const Events = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 

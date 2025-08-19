@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaUsers, FaHeart, FaStar } from 'react-icons/fa';
+import councilGroup from '../../assets/images/council-group.jpg';
 import './GroupPhoto.css';
 
 const GroupPhoto = () => {
@@ -89,7 +90,7 @@ const GroupPhoto = () => {
           >
             <div className="photo-glow"></div>
             <img 
-              src="/assets/images/council-group.jpg" 
+              src={councilGroup} 
               alt="E-CESA Council Team" 
               className="council-photo"
               onError={(e) => {

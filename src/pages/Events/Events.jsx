@@ -1,213 +1,169 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaUsers, FaExternalLinkAlt } from 'react-icons/fa';
-import './Events.css';
+import React from "react";
 
-const Events = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
+import { motion } from "framer-motion";
+import { FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import teachersDayImg from "../../assets/images/teachersday.jpg";
+import abhiyantrikiImg from "../../assets/images/abhiyantriki.jpg";
+import agritechImg from "../../assets/images/agritech.png";
+import escapeRoomImg from "../../assets/images/escaperoom.png";
+import treasureHuntImg from "../../assets/images/treasurehunt.jpg";
 
-  const categories = [
-    { id: 'all', label: 'All Events', color: '#ff6b6b' },
-    { id: 'workshop', label: 'Workshops', color: '#4ecdc4' },
-    { id: 'hackathon', label: 'Hackathons', color: '#45b7d1' },
-    { id: 'seminar', label: 'Seminars', color: '#feca57' },
-    { id: 'competition', label: 'Competitions', color: '#ff9ff3' },
-    { id: 'cultural', label: 'Cultural', color: '#54a0ff' }
-  ];
+import "./Events.css";
 
-  const events = [
-    {
-      id: 1,
-      title: "Tech Innovation Hackathon 2025",
-      description: "48-hour coding marathon to build next-gen solutions for real-world problems. Join us for the ultimate challenge!",
-      date: "2025-09-15",
-      time: "9:00 AM",
-      venue: "KJSCE Main Auditorium",
-      category: "hackathon",
-      image: "/assets/images/hackathon.jpg",
-      registrationLink: "#",
-      maxParticipants: 100,
-      registeredParticipants: 75
-    },
-    {
-      id: 2,
-      title: "IoT & Robotics Workshop",
-      description: "Hands-on workshop covering Arduino, Raspberry Pi, sensor integration, and building smart devices.",
-      date: "2025-10-10",
-      time: "2:00 PM",
-      venue: "Electronics Lab",
-      category: "workshop",
-      image: "/assets/images/iot-workshop.jpg",
-      registrationLink: "#",
-      maxParticipants: 50,
-      registeredParticipants: 30
-    },
-    {
-      id: 3,
-      title: "AI/ML Seminar Series",
-      description: "Industry experts share insights on artificial intelligence, machine learning trends, and career opportunities.",
-      date: "2025-11-05",
-      time: "11:00 AM",
-      venue: "Seminar Hall",
-      category: "seminar",
-      image: "/assets/images/ai-seminar.jpg",
-      registrationLink: "#",
-      maxParticipants: 200,
-      registeredParticipants: 150
-    },
-    {
-      id: 4,
-      title: "Code Combat Competition",
-      description: "Test your programming skills in this intense coding competition with exciting prizes and recognition.",
-      date: "2025-12-01",
-      time: "10:00 AM",
-      venue: "Computer Lab",
-      category: "competition",
-      image: "/assets/images/coding-competition.jpg",
-      registrationLink: "#",
-      maxParticipants: 80,
-      registeredParticipants: 45
-    }
-  ];
+const events = [
+  {
+    date: "05 SEP",
+    title: "Teachers Day",
+    location: "B Auditorium",
+    time: "10:00 AM – 1:00 PM",
+    formLink: "https://docs.google.com/forms/d/1uG96EQlYdUqKbEdPFpFj4nghpzckQYkfPGJ8fRTvNsk/edit",
+    description:
+      "Celebrating our mentors with gratitude, fun activities, and performances.",
+    color: "#ff3f81",
+    image: teachersDayImg,
+  },
+  {
+    date: "21 OCT",
+    title: "Abhiyantriki",
+    location: "Gargi Plaza",
+    time: "9:00 AM – 5:00 PM",
+    formLink: "https://docs.google.com/forms/d/1uG96EQlYdUqKbEdPFpFj4nghpzckQYkfPGJ8fRTvNsk/edit",
+    description:
+      "Annual technical festival showcasing innovation, creativity, and collaboration.",
+    color: "#ffb400",
+    image: abhiyantrikiImg,
+  },
+  {
+    date: "16 JAN",
+    title: "AgriTech Hackathon",
+    location: "Quadrangle",
+    time: "24 Hours",
+    formLink: "https://docs.google.com/forms/d/1uG96EQlYdUqKbEdPFpFj4nghpzckQYkfPGJ8fRTvNsk/edit",
+    description:
+      "A flagship hackathon bringing together innovators, coders, and entrepreneurs to build impactful solutions in AgriTech.",
+    color: "#ff7043",
+    image: agritechImg,
+  },
+  {
+    date: "10 FEB",
+    title: "Escape Room",
+    location: "Lab B407",
+    time: "11:00 AM – 1:00 PM",
+    formLink: "https://docs.google.com/forms/d/1uG96EQlYdUqKbEdPFpFj4nghpzckQYkfPGJ8fRTvNsk/edit",
+    description:
+      "A thrilling puzzle solving challenge where teams race against time to escape by cracking clues and codes.",
+    color: "#2979ff",
+    image: escapeRoomImg, 
+  },
+  {
+    date: "15 MAR",
+    title: "Treasure Hunt",
+    location: "Somaiya Campus",
+    time: "1:00 PM – 3:00 PM",
+    formLink: "https://docs.google.com/forms/d/1uG96EQlYdUqKbEdPFpFj4nghpzckQYkfPGJ8fRTvNsk/edit",
+    description:
+      "An adventurous hunt across the campus where teams solve riddles and follow clues to find the hidden treasure.",
+    color: "#00c853",
+    image: treasureHuntImg,
+  },
+];
 
-  const filteredEvents = activeCategory === 'all' 
-    ? events 
-    : events.filter(event => event.category === activeCategory);
 
-  const getCategoryColor = (category) => {
-    const cat = categories.find(c => c.id === category);
-    return cat ? cat.color : '#ff6b6b';
-  };
 
+
+export default function Events() {
   return (
-    <div className="main-content">
-      <section className="vibrant-events">
-        <div className="events-bg-elements">
-          <div className="bg-shape shape-1"></div>
-          <div className="bg-shape shape-2"></div>
-          <div className="bg-shape shape-3"></div>
-          <div className="bg-wave"></div>
-        </div>
+     <div className="main-content">
+    <div className="events-container">
+      {/* Funky SVG Bg */}
+      <div className="funky-bg"></div>
 
-        <div className="container">
-          <motion.div
-            className="events-header"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+      {/* Header */}
+      <div className="events-header">
+        
+        <motion.h1
+          className="events-heading"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Our Events
+          <span className="sub-text">
+            2025–26: Bigger, Louder, Crazier — Let’s Go!<hr>
+            </hr>
+            <hr />
+            <hr /><hr /><hr /><hr /><hr /><hr />
+          </span>
+        </motion.h1>
+      </div>
+
+      {/* rope */}
+      <motion.div
+        className="events-rope"
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: 1 }}
+        transition={{ duration: 0.8 }}
+      />
+
+      {/* Timeline Items */}
+      {events.map((event, index) => (
+        <motion.div
+          key={index}
+          className={`event-item ${index % 2 === 0 ? "left" : "right"}`}
+          initial={{ opacity: 0, scale: 0.8, y: 80 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.7,
+            ease: "easeOut",
+            delay: index * 0.2,
+          }}
+        >
+          {/* calendar */}
+          <div
+            className="event-date-calendar"
+            style={{ backgroundColor: event.color }}
           >
-            <h1 className="section-title">Exciting Events 🎉</h1>
-            <p className="section-subtitle">
-              Join Mumbai's most vibrant tech events and expand your horizons!
-            </p>
-          </motion.div>
-
-          {/* Category Filter */}
-          <motion.div
-            className="category-filter"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            {categories.map((category, index) => (
-              <motion.button
-                key={category.id}
-                className={`filter-btn ${activeCategory === category.id ? 'active' : ''}`}
-                style={{ '--category-color': category.color }}
-                onClick={() => setActiveCategory(category.id)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-              >
-                {category.label}
-              </motion.button>
-            ))}
-          </motion.div>
-
-          {/* Events Grid */}
-          <div className="events-grid">
-            {filteredEvents.map((event, index) => (
-              <motion.div
-                key={event.id}
-                className="event-card"
-                style={{ '--event-color': getCategoryColor(event.category) }}
-                initial={{ opacity: 0, y: 100, scale: 0.8 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                whileHover={{ 
-                  y: -10,
-                  boxShadow: `0 20px 40px ${getCategoryColor(event.category)}30`
-                }}
-              >
-                <div className="event-glow"></div>
-                
-                <div className="event-image">
-                  <img 
-                    src={event.image} 
-                    alt={event.title}
-                    onError={(e) => {
-                      e.target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='${getCategoryColor(event.category)}'/%3E%3Ctext x='150' y='100' text-anchor='middle' fill='white' font-size='16'%3E${event.title}%3C/text%3E%3C/svg%3E`;
-                    }}
-                  />
-                  <div className="event-category">{event.category}</div>
-                </div>
-
-                <div className="event-content">
-                  <h3 className="event-title">{event.title}</h3>
-                  <p className="event-description">{event.description}</p>
-                  
-                  <div className="event-details">
-                    <div className="event-detail">
-                      <FaCalendarAlt />
-                      <span>{new Date(event.date).toLocaleDateString()}</span>
-                    </div>
-                    <div className="event-detail">
-                      <FaClock />
-                      <span>{event.time}</span>
-                    </div>
-                    <div className="event-detail">
-                      <FaMapMarkerAlt />
-                      <span>{event.venue}</span>
-                    </div>
-                    <div className="event-detail">
-                      <FaUsers />
-                      <span>{event.registeredParticipants}/{event.maxParticipants}</span>
-                    </div>
-                  </div>
-
-                  <div className="event-progress">
-                    <div 
-                      className="progress-bar"
-                      style={{ 
-                        width: `${(event.registeredParticipants / event.maxParticipants) * 100}%`,
-                        background: getCategoryColor(event.category)
-                      }}
-                    ></div>
-                  </div>
-
-                  <motion.a
-                    href={event.registrationLink}
-                    className="event-register-btn"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Register Now <FaExternalLinkAlt />
-                  </motion.a>
-                </div>
-              </motion.div>
-            ))}
+            <div className="calendar-top">
+              <span className="pin"></span>
+              <span className="pin"></span>
+            </div>
+            <div className="calendar-date">{event.date}</div>
           </div>
-        </div>
-      </section>
-    </div>
-  );
-};
 
-export default Events;
+          {/* event card */}
+          <div className="event-card">
+            <div className="event-image">
+              <img src={event.image} alt={event.title} />
+            </div>
+            <div className="event-info">
+              <h3>{event.title}</h3>
+              <p>{event.description}</p>
+              <div className="event-footer">
+                <div className="event-meta">
+                  <div className="event-location">
+                    <FaMapMarkerAlt className="icon" />
+                    <span>{event.location}</span>
+                  </div>
+                  <div className="event-time">
+                    <FaClock className="icon" />
+                    <span>{event.time}</span>
+                  </div>
+                </div>
+                <a
+                  href={event.formLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="register-btn"
+                >
+                  Register
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+  );
+}
